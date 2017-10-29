@@ -2,6 +2,8 @@ require("dotenv").config();
 
 const webpack = require("webpack");
 
+const ENV = process.env;
+
 const PATHS = {
   INPUT: {
     JS: `${__dirname}/src/js`,
@@ -40,7 +42,7 @@ module.exports = {
     ]
   },
   devServer: {
-    port: "8000",
+    port: ENV.DEV_PORT,
     contentBase: "./public",
     proxy: {
       "/api/**": {
