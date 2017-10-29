@@ -2,16 +2,16 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8.8.1
+      - image: circleci/node:8.8
 
-  steps:
-    - checkout
-    - run:
-        name: Install Node Modules
-        command: npm install
-    - run:
-        name: Lint
-        command: npm run lint
-    - run:
-        name: Test
-        command: npm run test
+    steps:
+      - checkout
+      - run:
+          name: Install Node Modules
+          command: npm install
+      - run:
+          name: Lint
+          command: npm run lint
+      - run:
+          name: Test
+          command: npm run test
