@@ -1,0 +1,47 @@
+{
+  "name": "aghome",
+  "version": "1.0.0",
+  "description": "Dashboard for AG.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha './{api,src}/**/*.test.js'",
+    "lint": "eslint ./api ./src",
+    "start": "webpack-dev-server",
+    "server": "nodemon --watch ./api ./api/index.js",
+    "docs": "jsdoc src/js -r -d docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agnott/aghome.git"
+  },
+  "author": "Andrew Gnott",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/agnott/aghome/issues"
+  },
+  "homepage": "https://github.com/agnott/aghome#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "dotenv": "^4.0.0",
+    "eslint": "^4.10.0",
+    "jsdoc": "^3.5.5",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.11.0",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.4",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
