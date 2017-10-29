@@ -19,9 +19,9 @@ Home screen dashboard for the AG's.
 
 ### Contributing Basics
 1. Check out master
-  - `git checkout master`
+    - `git checkout master`
 2. Pull most recent code from GitHub
-  - `git pull`
+    - `git pull`
 3. Check out a new branch
   - `git checkout -b [name of branch]`
 4. Make your local code changes
