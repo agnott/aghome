@@ -10,7 +10,7 @@ Home screen dashboard for the AG's.
 1. Install dependencies
   - `npm install`
 1. Create a `.env` file in the project root and populate with the following information
-  ```python
+  ```
     API_PORT=[8001]
     API_VERSION=[0.0.1]  # This may change
 
