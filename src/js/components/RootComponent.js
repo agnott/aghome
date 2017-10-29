@@ -1,4 +1,4 @@
-const React = requir('react');
+const React = require('react');
 
 class RootComponent extends React.Component {
   constructor(props) {
@@ -7,7 +7,9 @@ class RootComponent extends React.Component {
 
   render() {
     return (
-      <div>Hello World</div>
+      <div>Hello World!</div>
     );
   }
 }
+
+module.exports = RootComponent;

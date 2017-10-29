@@ -2,15 +2,21 @@ module.exports = {
     "env": {
         "browser": true,
         "commonjs": true,
-        "es6": true
+        "es6": true,
+        "mocha": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "sourceType": "module"
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
     },
     "globals": {
-      "process": true
+      "process": true,
     },
+    "plugins": ["react"],
     "rules": {
         "indent": [
             "error",
@@ -27,6 +33,8 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error"
     }
 };

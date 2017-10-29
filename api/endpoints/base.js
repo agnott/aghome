@@ -6,10 +6,19 @@ const endpoint = express.Router();
 /**
  * Returns the API version
  */
-endpoint.get('/', (req, res) => {
+const getApiVersion = (req, res) => {
   res.send({
     version: ENV.API_VERSION
   });
-});
+};
 
+// Create endpoint routes
+endpoint.get('/', getApiVersion);
+
+// Export the router
 module.exports = endpoint;
+
+// Export handlers functions for testing
+module.exports.handlers = {
+  '/': getApiVersion
+};
