@@ -9,7 +9,7 @@ Home screen dashboard for the AG's.
     - `git clone git@github.com:agnott/aghome.git`
 4. Install dependencies
     - `npm install`
-5. Create a `.env` file in the project root and populate with the following information
+5. Create a `.env` file in the project root and populate with the following information (no square brackets)
     ```
       API_PORT=[8001]
       API_VERSION=[0.0.1]  # This may change
