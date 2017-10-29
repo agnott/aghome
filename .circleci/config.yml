@@ -6,9 +6,15 @@ jobs:
 
     steps:
       - checkout
+      - restore_cache:
+          key: aghome-node-cache-{{ checksum "package.json" }}
       - run:
-          name: Install Node Modules
+          name: Install node modules
           command: npm install
+      - save_cache:
+          key: aghome-node-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
       - run:
           name: Lint
           command: npm run lint
