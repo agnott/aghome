@@ -8,8 +8,9 @@ const cheerio = require('cheerio');
  * Returns object with nba scores by scraping espn
  */
 const getNbaScores = (req, res) => {
+  const date = req.query.date;
 
-  request('https://www.cbssports.com/nba/scoreboard/', (error, response, html) => {
+  request(`https://www.cbssports.com/nba/scoreboard/${date}`, (error, response, html) => {
     if (!error && response.statusCode == 200) {
       const $ = cheerio.load(html);
 
