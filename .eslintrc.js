@@ -15,6 +15,7 @@ module.exports = {
     },
     "globals": {
       "process": true,
+      "arguments": true
     },
     "plugins": ["react"],
     "rules": {

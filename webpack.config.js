@@ -1,6 +1,6 @@
-require("dotenv").config();
+require('dotenv').config();
 
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 const ENV = process.env;
 
@@ -19,33 +19,33 @@ module.exports = {
   ],
   output: {
     path: PATHS.OUTPUT,
-    filename: "bundle.js"
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
         include: PATHS.INPUT.JS,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         query: {
-          presets: ["env", "react"]
+          presets: ['env', 'react']
         }
       }, {
         test: /\.less$/,
         include: PATHS.INPUT.CSS,
         loaders: [
-          "style-loader",
-          "css-loader",
-          "less-loader"
+          'style-loader',
+          'css-loader',
+          'less-loader'
         ]
       }
     ]
   },
   devServer: {
     port: ENV.DEV_PORT,
-    contentBase: "./public",
+    contentBase: './public',
     proxy: {
-      "/api/**": {
+      '/api/**': {
         target: `http://localhost:${process.env.API_PORT}`,
         secure: false
       }

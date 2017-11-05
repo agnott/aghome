@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha './{api,src}/**/*.test.js'",
     "lint": "eslint ./api ./src",
+    "lint-fix": "./node_modules/.bin/eslint ./api ./src --fix",
     "start": "webpack-dev-server",
     "server": "nodemon --watch ./api ./api/index.js",
     "docs": "jsdoc src/js -r -d docs"
@@ -23,7 +24,9 @@
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.18.1",
+    "cheerio": "^1.0.0-rc.2",
     "express": "^4.15.4",
+    "moment": "^2.19.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },

@@ -13,11 +13,12 @@ app.use(bp.urlencoded({
 }));
 
 // Route adder
-const addRoute = (path, router) => {
-  app.use(`/api${path}`, router);
+const addRoute = (router) => {
+  app.use('/api', router);
 };
 
-addRoute('/', require('./endpoints/base'));
+addRoute(require('./endpoints/base'));
+addRoute(require('./endpoints/nba'));
 
 app.listen(ENV.API_PORT, () => {
   console.log(`[API Server]: Listening on port ${ENV.API_PORT}`);
