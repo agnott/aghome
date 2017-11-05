@@ -1,93 +1,51 @@
 const express = require('express');
 const endpoint = express.Router();
 
-const request = require('request');
-const cheerio = require('cheerio');
+const axios = require('axios');
+const moment = require('moment');
+
+const log = require('../utils/logger');
+
+const NBA_LEAGUE_ID = '00';
+const HEADERS = {
+  'origin': 'http://stats.nba.com'
+};
 
 /**
  * Returns object with nba scores by scraping espn
  */
 const getNbaScores = (req, res) => {
-  const date = req.query.date;
+  const date = req.query.date || moment().format('MM DD YYYY');
 
-  request(`https://www.cbssports.com/nba/scoreboard/${date}`, (error, response, html) => {
-    if (!error && response.statusCode == 200) {
-      const $ = cheerio.load(html);
+  axios.get('https://stats.nba.com/stats/scoreboardv2/', {
+    headers: HEADERS,
+    params: {
+      LeagueID: NBA_LEAGUE_ID,
+      DayOffset: 0,
+      GameDate: date
+    }
+  })
+  .then((axRes) => {
+    const data = {};
 
-      // Construct game objects
-      const scores = $('.single-score-card.nba').map((i, el) => {
-        const info = {};
-        const home = {};
-        const away = {};
-        const stats = {};
-
-        if ($(el).hasClass('ingame')) {
-          info.status = 'ingame';
-        } else if ($(el).hasClass('postgame')) {
-          info.status = 'postgame';
-        } else {
-          info.status = 'pregame';
+    // Transform data from table to list of objects
+    for (const set of axRes.data.resultSets) {
+      data[set.name] = set.rowSet.map((item, j) => {
+        let ret = {};
+        for (const [i, header] of set.headers.entries()) {
+          ret[header] = item[i];
         }
-
-        // Get game time, date, and broadcasting
-        info.broadcast = $(el).find('.top-bar .broadcaster').text().trim();
-        switch (info.status) {
-        case 'pregame':
-          info.gametime = JSON.parse(
-            $(el).find('.top-bar .pregame-date').attr('data-format-datetime')
-          ).value;
-          break;
-        case 'ingame':
-          info.quarter = $(el).find('.top-bar .game-status').text().trim().split(' ');
-          break;
-        case 'postgame':
-          info.outcome = $(el).find('.top-bar .game-status').text().trim();
-          break;
-        }
-
-        const scoreboard = $(el).find('.in-progress-table.section');
-        const scoreRows = {
-          away: scoreboard.find('table tbody tr').first(),
-          home: scoreboard.find('table tbody tr').last()
-        };
-
-        // Get the names of each team
-        away.name = scoreRows.away.find('td.team a.team').text();
-        home.name = scoreRows.home.find('td.team a.team').text();
-
-        // Get the record of each team
-        const recordRegex = /\b[0-9]*-[0-9]*(-[0-9]*)*$/;
-        away.record = recordRegex.exec(scoreRows.away.find('td.team').text().trim())[0];
-        home.record = recordRegex.exec(scoreRows.home.find('td.team').text().trim())[0];
-
-        // Get the logo images for each team
-        away.image = scoreRows.away.find('td.team img').attr('src');
-        home.image = scoreRows.home.find('td.team img').attr('src');
-
-        // Get quarter (and overtime) scoring for each team
-        away.quarters = scoreRows.away.find('td:not(.team)').map((i, el) => {
-          return $(el).text().trim();
-        }).get();
-        home.quarters = scoreRows.home.find('td:not(.team)').map((i, el) => {
-          return $(el).text().trim();
-        }).get();
-
-        return {
-          info,
-          home,
-          away,
-          stats
-        };
-      }).toArray();
-
-      res.send(scores);
-    } else {
-      res.status(500).send({
-        error: 'Could not process NBA scores'
+        return ret;
       });
     }
-  });
 
+    res.send(data);
+  })
+  .catch((axErr) => {
+    res.status(500).send({
+      error: 'Failed to get NBA scores'
+    });
+  });
 };
 
 // Create endpoint routes
