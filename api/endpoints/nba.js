@@ -4,8 +4,6 @@ const endpoint = express.Router();
 const axios = require('axios');
 const moment = require('moment');
 
-const log = require('../utils/logger');
-
 const NBA_LEAGUE_ID = '00';
 const HEADERS = {
   'origin': 'http://stats.nba.com'
@@ -25,27 +23,27 @@ const getNbaScores = (req, res) => {
       GameDate: date
     }
   })
-  .then((axRes) => {
-    const data = {};
+    .then((axRes) => {
+      const data = {};
 
-    // Transform data from table to list of objects
-    for (const set of axRes.data.resultSets) {
-      data[set.name] = set.rowSet.map((item, j) => {
-        let ret = {};
-        for (const [i, header] of set.headers.entries()) {
-          ret[header] = item[i];
-        }
-        return ret;
+      // Transform data from table to list of objects
+      for (const set of axRes.data.resultSets) {
+        data[set.name] = set.rowSet.map((item) => {
+          let ret = {};
+          for (const [i, header] of set.headers.entries()) {
+            ret[header] = item[i];
+          }
+          return ret;
+        });
+      }
+
+      res.send(data);
+    })
+    .catch(() => {
+      res.status(500).send({
+        error: 'Failed to get NBA scores'
       });
-    }
-
-    res.send(data);
-  })
-  .catch((axErr) => {
-    res.status(500).send({
-      error: 'Failed to get NBA scores'
     });
-  });
 };
 
 // Create endpoint routes
