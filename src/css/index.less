@@ -1,3 +1,28 @@
-html {
+@import "constants/colors.less";
+@import "functions/transitions.less";
+
+@import "modals.less";
+@import "text.less";
+
+@import "menu.less";
+
+html, body {
   font-family: 'Roboto', sans-serif;
+  padding: 0; margin: 0;
+  background-color: @color-light;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+*::after, *::before {
+  box-sizing: border-box;
+}
+
+#viewport {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
 }
