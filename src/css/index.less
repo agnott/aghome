@@ -1,9 +1,11 @@
 @import "constants/colors.less";
-@import "functions/transitions.less";
+@import "functions/mixins.less";
 
 @import "modals.less";
 @import "text.less";
+@import "input.less";
 
+@import "loading.less";
 @import "menu.less";
 
 html, body {
@@ -16,6 +18,14 @@ div {
   box-sizing: border-box;
 }
 
+br {
+  display: block;
+  margin: 10px 0px 0px 0px;
+  padding: 0px;
+  line-height: 0px;
+  content: " ";
+}
+
 *::after, *::before {
   box-sizing: border-box;
 }
@@ -25,4 +35,11 @@ div {
   height: 100%;
   width: 100%;
   overflow: auto;
+  background: repeating-linear-gradient(
+    -45deg,
+    @color-light,
+    @color-light 5px,
+    darken(@color-light, 1%) 5px,
+    darken(@color-light, 1%) 10px
+  );
 }

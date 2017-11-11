@@ -1,9 +1,9 @@
 .menu-content {
-  padding-top: 10px;
+  padding: 10px 0px 0px 0px;
 }
 
 .menu-inputs {
-  padding: 10px 10px 0px 10px;
+  padding: 10px 0px 0px 0px;
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -11,26 +11,32 @@
   grid-row-gap: 10px;
 }
 
-.menu-inputs div {
+.menu-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+}
+
+.menu-inputs div, .menu-options div {
+  .no-text-select();
+  .transition(@t-duration: 0.15s);
+
   position: relative;
   flex-grow: 1;
-  padding: 10px 10px 4px 10px;
+  padding: 10px 10px 5px 10px;
 
   border-bottom: 3px solid @color-primary;
   border-radius: 3px;
+
   background-color: @color-secondary;
   color: @color-white;
 
   text-align: center;
-  cursor: pointer;
+  overflow: hidden;
   z-index: 1;
 
-  overflow: hidden;
-
-  .transition(@t-duration: 0.15s);
-
-  &.center {
-    grid-column-start: 2;
+  &:not(.inactive) {
+    cursor: pointer;
   }
 
   &:not(.inactive):active {
@@ -38,14 +44,14 @@
   }
 
   &::after {
+    .transition(@t-duration: 0.15s);
+
     content: "";
     position: absolute;
     bottom: 0px; left: 0px;
     height: 100%; width: 100%;
     background-color: @color-primary;
     z-index: -1;
-
-    .transition(@t-duration: 0.15s);
   }
 
   &:not(.inactive):hover::after{
