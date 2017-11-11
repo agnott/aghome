@@ -1,0 +1,14 @@
+input {
+  .transition(@t-duration: 0.5s);
+
+  display: block;
+  width: 100%;
+  outline: none;
+  border: 1px solid @color-primary;
+  padding: 5px 10px;
+  box-sizing: border-box;
+
+  &:focus {
+    border: 1px solid @color-secondary;
+  }
+}

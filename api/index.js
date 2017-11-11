@@ -19,6 +19,7 @@ const addRoute = (router) => {
 
 addRoute(require('./endpoints/base'));
 addRoute(require('./endpoints/nba'));
+addRoute(require('./endpoints/users'));
 
 app.listen(ENV.API_PORT, () => {
   console.log(`[API Server]: Listening on port ${ENV.API_PORT}`);
