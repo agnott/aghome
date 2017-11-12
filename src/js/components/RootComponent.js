@@ -7,13 +7,31 @@ class RootComponent extends React.Component {
     super(props);
 
     this.state = {
-      inMenu: true
+      inMenu: true,
+      user: {
+        userId: '',
+        username: '',
+        config: {}
+      }
     };
+
+    this.onLoginSuccess = this.onLoginSuccess.bind(this);
+  }
+
+  onLoginSuccess(user) {
+    this.setState({
+      inMenu: false,
+      user: {
+        userId: user.userId,
+        username: user.username,
+        config: user.config
+      }
+    });
   }
 
   render() {
     if (this.state.inMenu) {
-      return <Menu />;
+      return <Menu onLoginSuccess={this.onLoginSuccess}/>;
     } else {
       return <div>Hello World!</div>;
     }

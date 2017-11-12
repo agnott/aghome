@@ -42,16 +42,34 @@ class Menu extends React.Component {
     });
   }
 
+  onLoginFailure() {
+    this.setState({
+      create: false,
+      username: {
+        value: '',
+        submitted: false,
+        confirmed: false,
+      },
+      password: {
+        value: '',
+        submitted: false,
+        confirmed: false
+      }
+    });
+  }
+
   loginUser() {
     this.setLoading(true);
 
     axios.post('/api/users/login', {
       username: this.state.username.value,
       password: this.state.password.value
-    }).then(() => {
+    }).then((res) => {
       this.setLoading(false);
+      this.props.onLoginSuccess(res.data);
     }).catch(() => {
       this.setLoading(false);
+      this.onLoginFailure();
     });
   }
 
@@ -61,10 +79,12 @@ class Menu extends React.Component {
     axios.post('/api/users/create', {
       username: this.state.username.value,
       password: this.state.password.value
-    }).then(() => {
+    }).then((res) => {
       this.setLoading(false);
+      this.props.onLoginSuccess(res.data);
     }).catch(() => {
       this.setLoading(false);
+      this.onLoginFailure();
     });
   }
 
