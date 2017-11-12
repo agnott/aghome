@@ -1,0 +1,31 @@
+@gutter-size: 10px;
+
+.home-container {
+  position: absolute;
+  top: 0px; left: 0px;
+  height: 100%; width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  & .home-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: @gutter-size;
+
+    position: relative;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+
+    & .home-column {
+      flex: 1;
+      min-width: 250px;
+      margin: @gutter-size;
+    }
+  }
+}
