@@ -5,7 +5,7 @@ class Header extends React.Component {
     super(props);
   }
 
-  render(props) {
+  render() {
     return (
       <header>
         {this.props.user.username}

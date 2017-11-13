@@ -1,5 +1,6 @@
 const React = require('react');
 const Widget = require('../shared/Widget');
+const Toggle = require('../shared/Toggle');
 const moment = require('moment');
 
 class ClockWidget extends React.Component {
@@ -10,6 +11,8 @@ class ClockWidget extends React.Component {
       time: Date.now(),
       artful: false
     };
+
+    this.onTypeChange = this.onTypeChange.bind(this);
   }
 
   componentWillMount() {
@@ -26,12 +29,28 @@ class ClockWidget extends React.Component {
     }
   }
 
+  onTypeChange(type) {
+    this.setState({
+      artful: type === 'Artful'
+    });
+  }
+
   render() {
-    const display = moment(this.state.time).format('hh mm ss');
+    const current = moment(this.state.time).format('hh mm ss');
 
     return (
       <Widget>
-        {display}
+        <Toggle
+          labels={['Standard', 'Artful']}
+          default="Standard"
+          onChange={this.onTypeChange}
+        />
+        {
+          (this.state.artful) ?
+            <div>ARTFUL CLOCK</div>
+            :
+            current
+        }
       </Widget>
     );
   }
