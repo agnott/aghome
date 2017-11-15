@@ -10,7 +10,7 @@ class ComponentRegistry extends React.Component {
     super(props);
   }
 
-  render(props) {
+  render() {
     return (
       <div className="home-container">
         <Header user={this.props.user}/>

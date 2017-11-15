@@ -5,7 +5,9 @@ module.exports = {
         "es6": true,
         "mocha": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+      "eslint:recommended"
+    ],
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",

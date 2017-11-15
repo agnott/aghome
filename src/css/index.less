@@ -5,17 +5,21 @@
 @import "text.less";
 @import "input.less";
 @import "widgets.less";
+@import "toggle.less";
 
 @import "loading.less";
 @import "menu.less";
 @import "home.less";
 @import "header.less";
 
+@import "clock.less";
+
 html, body {
   font-family: 'Roboto', sans-serif;
   padding: 0; margin: 0;
   background-color: @color-light;
   font-size: 14px;
+  color: @color-black;
 }
 
 div {
@@ -39,11 +43,5 @@ br {
   height: 100%;
   width: 100%;
   overflow: auto;
-  background: repeating-linear-gradient(
-    -45deg,
-    @color-light,
-    @color-light 5px,
-    darken(@color-light, 1%) 5px,
-    darken(@color-light, 1%) 10px
-  );
+  background: @pattern-white-stripes;
 }

@@ -59,3 +59,6 @@ typings/
 
 # Credentials
 .credentials
+
+# Bundles js
+public/bundle.js

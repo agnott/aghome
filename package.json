@@ -7,7 +7,7 @@
     "test": "mocha './{api,src}/**/*.test.js'",
     "lint": "eslint ./api ./src",
     "lint-fix": "./node_modules/.bin/eslint ./api ./src --fix",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --watch-poll",
     "server": "nodemon --watch ./api ./api/index.js",
     "docs": "jsdoc src/js -r -d docs"
   },
