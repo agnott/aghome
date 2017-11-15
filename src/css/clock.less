@@ -1,0 +1,37 @@
+.clock {
+  width: 100%;
+  padding: 5px 0px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: flex-start;
+
+  font-size: 1.20em;
+
+  background-color: @color-primary;
+  color: @color-white;
+  border-radius: 3px;
+}
+
+.clock-bits {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1.2em 1.2em 1.2em 1.2em 1.2em;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  justify-content: center;
+
+  & .cell {
+    .transition();
+
+    height: 100%; width: 100%;
+    background-color: @color-light;
+
+    &.active {
+      background-color: @color-primary;
+    }
+  }
+}
